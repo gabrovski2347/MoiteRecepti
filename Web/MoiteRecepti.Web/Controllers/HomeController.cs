@@ -5,12 +5,25 @@
     using MoiteRecepti.Web.ViewModels;
 
     using Microsoft.AspNetCore.Mvc;
+    using MoiteRecepti.Web.ViewModels.Home;
+    using MoiteRecepti.Data.Common.Repositories;
+    using MoiteRecepti.Data.Models;
+    using System.Linq;
+    using MoiteRecepti.Services.Data;
 
     public class HomeController : BaseController
     {
+        private readonly IGetCountService countService;
+
+        public HomeController(IGetCountService countService)
+        {
+            this.countService = countService;
+        }
         public IActionResult Index()
         {
-            return this.View();
+            var viewModel = countService.GetCounts();
+
+            return this.View(viewModel);
         }
 
         public IActionResult Privacy()

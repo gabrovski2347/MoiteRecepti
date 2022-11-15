@@ -19,8 +19,9 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using MoiteRecepti.Services.Data;
 
-    public class Program
+    public class StartUp
     {
         public static void Main(string[] args)
         {
@@ -60,7 +61,7 @@
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
-
+            services.AddTransient<IGetCountService, GetCountService>
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
         }
